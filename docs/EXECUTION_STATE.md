@@ -10,9 +10,9 @@ Never record secrets, balances, tokens, raw prompts, raw model output, or transc
 |---|---|
 | Phase | Stack Foundation |
 | Branch | `phase/stack-foundation` |
-| Last verified step | SF-02 |
-| Last commit hash | `30d1f23` (SF-02) |
-| Next action | SF-03 — verify and commit full stack scaffold |
+| Last verified step | SF-03 |
+| Last commit hash | `a7b38a9` (SF-03) |
+| Next action | Merge phase/stack-foundation, then start phase/visual-foundation (VF-01) |
 
 ## Step log
 
@@ -25,10 +25,11 @@ Never record secrets, balances, tokens, raw prompts, raw model output, or transc
 
 ### SF-02 — Configure development-session evidence
 
-- **Status:** Complete
-- **Commit hash:** `30d1f2360716f2e08a722808f3977689cc50c623`
-- **Acceptance criteria:** Supports AC-15 and conditional AC-16 — satisfied
+- **Status:** Complete (updated)
+- **Commit hash:** `30d1f2360716f2e08a722808f3977689cc50c623` (instructions file removed in follow-up cleanup)
+- **Acceptance criteria:** Supports AC-15 and conditional AC-16 — AC-15 satisfied; AC-16 omitted (no Copilot credits)
 - **Verification output:** `entire version` → 0.11.4; `entire checkpoint list` → 0; `entire doctor` → hooks installed; `git diff --check` passed; secret scan clean.
+- **Risks and decisions:** Copilot category omitted — no Copilot credits available. Qodo is used for internal code review only; it is not a challenge sponsor and no category is claimed for it. `.github/copilot-instructions.md` removed to avoid implying Copilot usage. Entire category remains conditional on public scrubbed checkpoint evidence.
 
 ### SF-03 — Scaffold the complete application stack
 
