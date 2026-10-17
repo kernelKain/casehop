@@ -10,23 +10,35 @@ Never record secrets, balances, tokens, raw prompts, raw model output, or transc
 |---|---|
 | Phase | Stack Foundation |
 | Branch | `phase/stack-foundation` |
-| Last verified step | none |
-| Last commit hash | `019ea1e` (main base) |
-| Next action | SF-01 — verify and record locked handoffs |
+| Last verified step | SF-01 |
+| Last commit hash | `a8a81e6` (SF-01) |
+| Next action | SF-02 — verify and commit Entire configuration |
 
 ## Step log
 
 ### SF-01 — Establish locked handoffs and execution tracking
 
-- **Status:** Verified, awaiting user commit
+- **Status:** Complete
 - **Phase branch:** `phase/stack-foundation`
-- **Commit hash:** pending (to be recorded at commit verification)
-- **Files changed:** `docs/HANDOFF_0.md` (verified, unchanged), `docs/HANDOFF.md` (created, identical to `docs/HANDOFF_1.md`), `docs/EXECUTION_STATE.md` (created), `.gitignore` (created)
-- **Acceptance criteria:** Contract preservation and resume policy; supports AC-17
-- **Verification output:** `git diff --check` passed; `cmp docs/HANDOFF.md docs/HANDOFF_1.md` identical; HANDOFF_0.md contains product locks (CaseHop, A-1847/A-1841); basic secret scan found no credentials; working tree contains only the four intended paths; no tracked modifications.
-- **Risks and decisions:** HANDOFF_0.md verified against product contract in HANDOFF.md Section 2. HANDOFF_1.md retained as source artifact; HANDOFF.md created as canonical copy. No secrets or real environment files committed. `.gitignore` excludes env, venv, node_modules, caches, and local Entire transcripts.
+- **Commit hash:** `a8a81e63d0fb09ff49539a02ded6f31091e733f0`
+- **Files changed:** `.gitignore`, `docs/HANDOFF.md`, `docs/EXECUTION_STATE.md` (`docs/HANDOFF_0.md` verified, unchanged)
+- **Acceptance criteria:** Contract preservation and resume policy; supports AC-17 — satisfied
+- **Verification output:** `git diff --check` passed; `cmp docs/HANDOFF.md docs/HANDOFF_1.md` identical; HANDOFF_0.md product locks present; secret scan clean; working tree clean after commit.
+- **Risks and decisions:** HANDOFF_1.md retained as source artifact. No secrets committed.
 - **Time used:** unknown
-- **Next action:** User stages and commits with the locked message; report commit hash.
+- **Next action:** Complete (committed and verified).
+
+### SF-02 — Configure development-session evidence
+
+- **Status:** In progress
+- **Phase branch:** `phase/stack-foundation`
+- **Commit hash:** pending
+- **Files changed:** `.entire/`, `.codex/hooks.json`, `.opencode/plugins/entire.ts`, `.github/copilot-instructions.md`
+- **Acceptance criteria:** Supports AC-15 and conditional AC-16
+- **Verification output:** `entire version` → Entire CLI 0.11.4; `entire checkpoint list` → 0 checkpoints (expected before first session); `entire doctor` → Codex/OpenCode hooks installed, OpenCode hook config OK, git hooks OK. Codex hook trust shows 7 hooks needing approval via `/hooks` in Codex (recorded as risk; auth is valid).
+- **Risks and decisions:** Entire CLI 0.11.5 available but not upgraded (avoid broad upgrade). Codex hooks require approval in Codex TUI before capture is active. Entire auth logged in as github:kernelKain (expires in 29d). No secrets in generated files. `.entire/.gitignore` excludes tmp/settings.local/metadata/logs.
+- **Time used:** unknown
+- **Next action:** Review full diff, run `git diff --check`, commit with locked message.
 
 ## Resume policy
 
