@@ -35,5 +35,10 @@ Thumbs.db
 
 # Local execution evidence (never commit transcripts or credentials)
 .entire/local/
+
+# Frontend test artifacts
+frontend/coverage/
+frontend/playwright-report/
+frontend/test-results/
 "><|end|><|start|>startup to=write<|channel|>analysis <|constrain|>xml<|message|><rfl:parameter name="path">
 /home/kernel-kain/Documents/Github/casehop/docs/EXECUTION_STATE.md

@@ -1,0 +1,41 @@
+services:
+  - type: web
+    name: casehop-web
+    runtime: static
+    buildCommand: npm --prefix frontend ci && npm --prefix frontend run build
+    staticPublishPath: frontend/dist
+    envVars:
+      - key: VITE_API_BASE_URL
+        sync: false
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+
+  - type: web
+    name: casehop-api
+    runtime: python
+    buildCommand: pip install -r backend/requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT --app-dir backend
+    healthCheckPath: /api/v1/health
+    envVars:
+      - key: BACKBOARD_API_KEY
+        sync: false
+      - key: CASEHOP_MODE
+        value: fixture
+      - key: CASEHOP_MODEL_BASELINE
+        value: openai/gpt-4o
+      - key: CASEHOP_MODEL_CANDIDATE_A
+        value: openrouter/qwen/qwen3-32b
+      - key: CASEHOP_MODEL_CANDIDATE_B
+        value: openrouter/deepseek/deepseek-chat-v3.1
+      - key: CASEHOP_MIN_BALANCE_USD
+        value: "1.0"
+      - key: CASEHOP_MAX_CONCURRENT_CALLS
+        value: "2"
+      - key: CASEHOP_RUN_TTL_SECONDS
+        value: "3600"
+      - key: CASEHOP_ALLOWED_ORIGINS
+        sync: false
+      - key: CASEHOP_ALLOW_CUSTOM_PACKS
+        value: "false"

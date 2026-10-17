@@ -10,35 +10,37 @@ Never record secrets, balances, tokens, raw prompts, raw model output, or transc
 |---|---|
 | Phase | Stack Foundation |
 | Branch | `phase/stack-foundation` |
-| Last verified step | SF-01 |
-| Last commit hash | `a8a81e6` (SF-01) |
-| Next action | SF-02 — verify and commit Entire configuration |
+| Last verified step | SF-02 |
+| Last commit hash | `30d1f23` (SF-02) |
+| Next action | SF-03 — verify and commit full stack scaffold |
 
 ## Step log
 
 ### SF-01 — Establish locked handoffs and execution tracking
 
 - **Status:** Complete
-- **Phase branch:** `phase/stack-foundation`
 - **Commit hash:** `a8a81e63d0fb09ff49539a02ded6f31091e733f0`
-- **Files changed:** `.gitignore`, `docs/HANDOFF.md`, `docs/EXECUTION_STATE.md` (`docs/HANDOFF_0.md` verified, unchanged)
 - **Acceptance criteria:** Contract preservation and resume policy; supports AC-17 — satisfied
-- **Verification output:** `git diff --check` passed; `cmp docs/HANDOFF.md docs/HANDOFF_1.md` identical; HANDOFF_0.md product locks present; secret scan clean; working tree clean after commit.
-- **Risks and decisions:** HANDOFF_1.md retained as source artifact. No secrets committed.
-- **Time used:** unknown
-- **Next action:** Complete (committed and verified).
+- **Verification output:** `git diff --check` passed; `cmp docs/HANDOFF.md docs/HANDOFF_1.md` identical; secret scan clean.
 
 ### SF-02 — Configure development-session evidence
+
+- **Status:** Complete
+- **Commit hash:** `30d1f2360716f2e08a722808f3977689cc50c623`
+- **Acceptance criteria:** Supports AC-15 and conditional AC-16 — satisfied
+- **Verification output:** `entire version` → 0.11.4; `entire checkpoint list` → 0; `entire doctor` → hooks installed; `git diff --check` passed; secret scan clean.
+
+### SF-03 — Scaffold the complete application stack
 
 - **Status:** In progress
 - **Phase branch:** `phase/stack-foundation`
 - **Commit hash:** pending
-- **Files changed:** `.entire/`, `.codex/hooks.json`, `.opencode/plugins/entire.ts`, `.github/copilot-instructions.md`
-- **Acceptance criteria:** Supports AC-15 and conditional AC-16
-- **Verification output:** `entire version` → Entire CLI 0.11.4; `entire checkpoint list` → 0 checkpoints (expected before first session); `entire doctor` → Codex/OpenCode hooks installed, OpenCode hook config OK, git hooks OK. Codex hook trust shows 7 hooks needing approval via `/hooks` in Codex (recorded as risk; auth is valid).
-- **Risks and decisions:** Entire CLI 0.11.5 available but not upgraded (avoid broad upgrade). Codex hooks require approval in Codex TUI before capture is active. Entire auth logged in as github:kernelKain (expires in 29d). No secrets in generated files. `.entire/.gitignore` excludes tmp/settings.local/metadata/logs.
+- **Files changed:** `frontend/`, `backend/`, `.github/workflows/ci.yml`, `.env.example`, `render.yaml`, `README.md`, `.gitignore`
+- **Acceptance criteria:** Foundations for AC-12, AC-14, AC-17
+- **Verification output:** `python3.12` 3.12.12, `node` 24.21.0, `npm` 11.7.0. Backend: ruff check/format pass; mypy pass; pytest 2 passed. Frontend: eslint pass; tsc pass; vitest 1 passed; vite build success; playwright 2 passed. `git diff --check` passed. No secrets found.
+- **Risks and decisions:** Frontend uses Vite 8, React 19, Tailwind 4, TypeScript 6. Backend uses FastAPI 0.143, Pydantic 2.14, Python 3.12. Versions pinned via lockfiles/requirements. No live secrets. CI includes browser install for Playwright.
 - **Time used:** unknown
-- **Next action:** Review full diff, run `git diff --check`, commit with locked message.
+- **Next action:** Run all non-live quality commands; review diff; commit.
 
 ## Resume policy
 
